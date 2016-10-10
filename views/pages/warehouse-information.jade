@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    .container
+        .row
+            table.table.table-hover.table-bordered
+                thead
+                    tr
+                        th 仓库编号
+                        th 仓库名称
+                        th 所在地址
+                        th 负责人
+                        th 备注
+                        th 删除
+                tbody
+                    each warehouse in warehouses
+                        tr(class="warehouse-id-#{warehouse._id}")
+                            td: a(href="#") #{warehouse._id}
+                            td #{warehouse.name}
+                            td #{warehouse.address}
+                            td #{warehouse.manager}
+                            td #{warehouse.other}
+                            td
+                                button.btn.btn-danger.del(type="button",data-id="#{warehouse._id}")删除

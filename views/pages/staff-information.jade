@@ -1,8 +1,8 @@
 extends ../layout
-
 block content
     .container
         .row
+            a.btn.btn-primary.center-block(href="/admin/staff") 添加
             table.table.table-hover.table-bordered
                 thead
                     tr
@@ -12,17 +12,19 @@ block content
                         th 所属部门
                         th 联系方式
                         th 籍贯
+                        //th 更新时间
                         th 备注
                         th 删除
                 tbody
-                    each user in users
-                        tr(class="user-id-#{user._id}")
-                            td: a(href="#") #{user._id}
-                            td #{user.name}
-                            td #{user.sex}
-                            td #{user.department}
-                            td #{user.tel}
-                            td #{user.native}
-                            td #{user.other}
+                    each staff in staffs
+                        tr(class="staff-id-#{staff._id}")
+                            td: a(href="/staffs/#{staff._id}") #{staff._id}
+                            td #{staff.name}
+                            td #{staff.sex}
+                            td #{staff.department}
+                            td #{staff.tel}
+                            td #{staff.native}
+                            //td #{moment(item.meta.updateAt).format('DD/MM/YYYY')}
+                            td #{staff.other}
                             td
-                                button.btn.btn-danger.del(type="button",data-id="#{user._id}")删除
+                                button.btn.btn-danger.del(type="button",data-id="#{staff._id}")删除

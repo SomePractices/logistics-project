@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+    .container
+        .row
+            form.form-horizontal(method="post",action="/admin/staff/new")
+                input(type="hidden",name="staff[_id]",value="#{staff._id}")
+                .form-group
+                    label.col-sm-2.control-label(for="inputID") 工号
+                    .col-sm-10
+                        input#inputID.form-control(type="text",name="staff[_id]",value="#{staff._id}")
+                .form-group
+                    label.col-sm-2.control-label(for="inputName") 姓名
+                    .col-sm-10
+                        input#inputName.form-control(type="text",name="staff[name]",value="#{staff.name}")
+                .form-group
+                    label.col-sm-2.control-label(for="inputSex") 性别
+                    .col-sm-10
+                        input#inputSex.form-control(type="text",name="staff[sex]",value="#{staff.sex}")
+                .form-group
+                    label.col-sm-2.control-label(for="inputDepartment") 所属部门
+                    .col-sm-10
+                        input#inputDepartment.form-control(type="text",name="staff[department]",value="#{staff.department}")
+                .form-group
+                    label.col-sm-2.control-label(for="inputTel") 联系方式
+                    .col-sm-10
+                        input#inputTel.form-control(type="text",name="staff[tel]",value="#{staff.tel}")
+                .form-group
+                    label.col-sm-2.control-label(for="inputOther") 备注
+                    .col-sm-10
+                        textarea#inputOther.form-control(type="text",name="staff[other]",value="#{staff.other}")
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button.btn.btn-default(type="submit") 确认添加
