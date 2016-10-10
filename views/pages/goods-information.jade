@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+    .container
+        .row
+            table.table.table-hover.table-bordered
+                thead
+                    tr
+                        th 单号
+                        th 类型
+                        th 所在库
+                        th 备注
+                        th 删除
+                tbody
+                    each item in goods
+                        tr(class="item-id-#{item._id}")
+                            td: a(href="#") #{item._id}
+                            td #{item.type}
+                            td #{item.warehouse}
+                            td #{item.other}
+                            td
+                                button.btn.btn-danger.del(type="button",data-id="#{item._id}")删除

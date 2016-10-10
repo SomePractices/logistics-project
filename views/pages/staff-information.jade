@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+    .container
+        .row
+            table.table.table-hover.table-bordered
+                thead
+                    tr
+                        th 工号
+                        th 姓名
+                        th 性别
+                        th 所属部门
+                        th 联系方式
+                        th 籍贯
+                        th 备注
+                        th 删除
+                tbody
+                    each user in users
+                        tr(class="user-id-#{user._id}")
+                            td: a(href="#") #{user._id}
+                            td #{user.name}
+                            td #{user.sex}
+                            td #{user.department}
+                            td #{user.tel}
+                            td #{user.native}
+                            td #{user.other}
+                            td
+                                button.btn.btn-danger.del(type="button",data-id="#{user._id}")删除

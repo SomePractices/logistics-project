@@ -1,0 +1,177 @@
+style.
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html, body {
+        height: 100%
+    }
+
+    body {
+        font-family: arial, 宋体, serif;
+        font-size: 16px;
+    }
+    .nav{
+        list-style-type: none;
+        padding-top: 20px;
+    }
+    .nav li a {
+        display: block;
+        padding-left: 50px;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    #admin {
+        text-align: center;
+    }
+
+    #admin span {
+        color: #fff;
+    }
+
+    .child-navs {
+        padding-left: 50px;
+    }
+
+
+    #nav li ul {
+        list-style: none;
+        text-align: left;
+        padding-left: 50px;
+
+    }
+
+    #nav li ul li {
+        font-size: 18px;
+        color: #fff;
+    }
+
+    #nav li ul a {
+        padding-left: 20px;
+        width: 160px;
+    }
+
+    /*下面是二级目录的链接样式*/
+    #nav li ul a:link {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    #nav li ul a:visited {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    #nav li ul a:hover {
+        font-size: 22px;
+        text-decoration: none;
+        font-weight: normal;
+    }
+
+    /*==============================*/
+    #nav li:hover ul {
+        left: auto;
+    }
+    #nav li.sfhover ul {
+        left: auto;
+    }
+    #nav ul.collapsed {
+        display: none;
+    }
+script(type='text/javascript').
+    var LastLeftID = "";
+    function menuFix() {
+        var obj = document.getElementById("main-nav").getElementsByTagName("li");
+        for (var i = 0; i < obj.length; i++) {
+            obj[i].onmouseover = function () {
+                this.className += (this.className.length > 0 ? " " : "") + "sfhover";
+            };
+            obj[i].onmousedown = function () {
+                this.className += (this.className.length > 0 ? " " : "") + "sfhover";
+            };
+            obj[i].onmouseup = function () {
+                this.className += (this.className.length > 0 ? " " : "") + "sfhover";
+            };
+            obj[i].onmouseout = function () {
+                this.className = this.className.replace(new RegExp("( ?|^)sfhover\\b"), "");
+            }
+        }
+    }
+    function DoMenu(emid) {
+        var obj = document.getElementById(emid);
+        obj.className = (obj.className.toLowerCase() == "expanded" ? "collapsed" : "expanded");
+        if ((LastLeftID != "") && (emid != LastLeftID)) {
+            document.getElementById(LastLeftID).className = "collapsed";
+        }
+        LastLeftID = emid;
+    }
+    function GetMenuID() {
+        var MenuID = "";
+        var _paramStr = new String(window.location.href);
+        var _sharpPos = _paramStr.indexOf("#");
+
+        if (_sharpPos >= 0 && _sharpPos < _paramStr.length - 1) {
+            _paramStr = _paramStr.substring(_sharpPos + 1, _paramStr.length);
+        }
+        else {
+            _paramStr = "";
+        }
+
+        if (_paramStr.length > 0) {
+            var _paramArr = _paramStr.split("&");
+            if (_paramArr.length > 0) {
+                var _paramKeyVal = _paramArr[0].split("=");
+                if (_paramKeyVal.length > 0) {
+                    MenuID = _paramKeyVal[1];
+                }
+            }
+        }
+
+        if (MenuID != "") {
+            DoMenu(MenuID)
+        }
+    }
+    GetMenuID();
+    menuFix();
+
+
+
+.row
+    div#admin
+        a(href="#") 管理员001
+        br
+        span 欢迎您
+        hr
+    div#nav.nav
+        ul#main-nav
+            li: a(href="#" onclick="DoMenu('basic-information')") 基本信息管理
+                ul#basic-information.collapsed.child-navs
+                    li: a(href="/users/list")> 员工信息
+                    //li: a(href="#")> 寄件人信息
+                    //li: a(href="#")> 收件人信息
+                    li: a(href="/goods/list")> 货品信息
+                    li: a(href="#")> 仓库信息
+            li: a(href="#" onclick="DoMenu('logistics-information')") 仓储物流管理
+                ul#logistics-information.collapsed.child-navs
+                    li: a(href="#")> 入库管理
+                    li: a(href="#")> 出库管理
+                    li: a(href="#")> 退货管理
+                    //li: a(href="#")物流查询
+                    //li: a(href="#")盘点
+                    //li: a(href="#")库存预警
+            li: a(href="#" onclick="DoMenu('tables-information')") 报表管理
+                ul#tables-information.collapsed.child-navs
+                    li: a(href="#")> 查询打印
+            li: a(href="#" onclick="DoMenu('finance-information')") 财务管理
+                ul#finance-information.collapsed.child-navs
+                    li: a(href="#")> 运费管理
+            li: a(href="#" onclick="DoMenu('system-maintain')") 系统维护
+                ul#system-maintain.collapsed.child-navs
+                    //li: a(href="#")> 数据恢复
+                    li: a(href="#")> 数据备份
+            li: a(href="#" onclick="DoMenu('system-control')") 系统管理
+                ul#system-control.collapsed.child-navs
+                    li: a(href="#")> 管理员管理
+                    li: a(href="#")> 操作员管理
